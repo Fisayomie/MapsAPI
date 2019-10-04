@@ -45,5 +45,5 @@ for i in range(0, len(DF), 1):
         region = np.nan
 
 # Accounting for duplicate region/location
-DF.drop_duplicates('Region', keep='first', inplace=True)
+DF.drop_duplicates('university names', keep='first', inplace=True)
 print(DF.head())
