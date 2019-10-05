@@ -27,12 +27,16 @@ for index, row in df.iterrows():
    response = requests.get(url)
    response.encoding = 'utf-8'
    result = response.json()
-   address = result.get('candidates')[0].get('formatted_address')  
-   print(address)
+   print(result)
+   if (result.get('status') == 'OK'):
+      address = result.get('candidates')[0].get('formatted_address')
+   elif(result.get('status') == 'ZERO_RESULTS' or result.get('status') =='INVALID_REQUEST'):
+      address = 'NaN'  
+   print('Address:', address)
    df.loc[index, 'address'] = address
    print('............................................................')
 df.drop_duplicates(['university names'], keep='first', inplace=True)
 print(df)
 
-
+#saving csv, change the path to your preferred path, ensure to add .csv after the path
 export_csv = df.to_csv (r'C:\Users\Sodei\Desktop\University_Locations.csv', index = None, header=True) 
