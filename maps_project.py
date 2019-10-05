@@ -31,16 +31,15 @@ else:
     CORRECT = np.nan
 #Tested okay...
 
-# Implementing the Condition that regions must be in the same country
+# Implementing for the whole dataset. This might take a while...
 DF['Region'] = None
 for i in range(0, len(DF), 1):
     geocode_result = MYKEY.geocode(DF.iat[i, 1])
     try:
-        region = geocode_result[0]['address_components'][3]['long_name']
-        if (geocode_result[0]['address_components'][4]['short_name'] == DF.iat[i, 2]):
-            DF.iat[i, DF.columns.get_loc('Region')] = region
-        else:
-            DF.iat[i, DF.columns.get_loc('Region')] = np.nan
+        for r in geocode_result[0]['address_components']:
+            if r['types'][0] == 'administrative_area_level_1':
+                region = r['long_name']
+                df.iat[i, df.columns.get_loc('Region')] = region
     except:
         region = np.nan
 
