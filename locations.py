@@ -27,7 +27,10 @@ for index, row in df.iterrows():
    response = requests.get(url)
    response.encoding = 'utf-8'
    result = response.json()
-   if(result == {'candidates': [], 'status': 'ZERO_RESULTS'}):
+
+   if(result.get('status') == 'ZERO_RESULTS'):
+      address = 'NaN'
+   elif(result.get('status') == 'INVALID_REQUEST'):
       address = 'NaN'
    else:
       address = result.get('candidates')[0].get('formatted_address')  
