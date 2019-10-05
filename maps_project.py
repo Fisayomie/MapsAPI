@@ -31,7 +31,7 @@ else:
     CORRECT = np.nan
 #Tested okay...
 
-# Implementing for the whole dataset. This might take a while...
+# Implementing the Condition that regions must be in the same country
 DF['Region'] = None
 for i in range(0, len(DF), 1):
     geocode_result = MYKEY.geocode(DF.iat[i, 1])
