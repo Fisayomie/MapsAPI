@@ -39,7 +39,7 @@ for i in range(0, len(DF), 1):
         for r in geocode_result[0]['address_components']:
             if r['types'][0] == 'administrative_area_level_1':
                 region = r['long_name']
-                df.iat[i, df.columns.get_loc('Region')] = region
+                DF.iat[i, DF.columns.get_loc('Region')] = region
     except:
         region = np.nan
 
